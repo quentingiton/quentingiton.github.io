@@ -199,6 +199,11 @@ section {
   text-align: center;
 }
 
+.subtitle {
+  color: black;
+  text-align: center;
+}
+
 #social-container {
   display: flex;
   justify-content: center;
@@ -358,12 +363,26 @@ section {
   position: relative;
 }
 
+.teaching-container {
+  display: inline-table;
+}
+
+.teaching-info-title-container {
+  display: table-cell;
+  width: 75%;
+}
+
+.teaching-info-date-container {
+  width: 25%;
+}
+
 .teaching-containers {
   gap: 2rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
 }
 .teaching-details-container {
+  display: flex;
   justify-content: center;
   flex-direction: column;
 }
@@ -432,11 +451,10 @@ article .icon {
 /* CONTACT SECTION */
 
 #contact {
-/*  display: flex;
+  display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 70vh; */
-  position: relative;
+  height: 70vh;
 }
 
 .contact-info-upper-container {
