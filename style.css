@@ -224,6 +224,11 @@ section {
   max-width: 100px;
 }
 
+.logo-renault {
+  max-height: 50px;
+  width: auto;
+}
+
 /* BUTONS */
 
 .btn-container {
@@ -409,6 +414,7 @@ article .icon {
   justify-content: center;
   flex-direction: column;
   height: 70vh;
+  position: relative;
 }
 
 .contact-info-upper-container {
