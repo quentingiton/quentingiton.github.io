@@ -358,6 +358,22 @@ section {
   position: relative;
 }
 
+.teaching-containers {
+  gap: 2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
+.teaching-details-container {
+  justify-content: center;
+  flex-direction: column;
+}
+
+.teaching-containers,
+.teaching-details-container {
+  display: flex;
+}
+
+
 /* PROJECTS SECTION */
 
 #projects {
