@@ -1,47 +1,87 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import ProfileCard from "@/components/ProfileCard.vue";
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it! <3" />
-    </div>
+    <nav id="desktop-nav">
+      <div class="logo">Quentin Giton</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#home" class="active">Projects</a></li>
+          <li><a href="#conferences">Teaching</a></li>
+          <li><a href="#monge">Interests</a></li>
+          <li><a href="#posts">Posts</a></li>
+          <li><a href="#posts">Conferences</a></li>
+          <li><a href="#posts">Research</a></li>
+        </ul>
+      </div>
+    </nav>
   </header>
 
   <main>
-    <TheWelcome />
+    <ProfileCard />
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
   header {
+    font-family: "Poppins", sans-serif;
+    background-color: white;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  nav {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
   }
 
-  header .wrapper {
+  .nav-links {
+    list-style: none;
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    gap: 15px;
   }
-}
+
+  .nav-links li {
+    position: relative;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    padding: 5px 10px;
+  }
+
+  .nav-links a.active {
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  .icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .icons a img {
+    width: 20px;
+    height: 20px;
+  }
 </style>
