@@ -410,10 +410,10 @@ article .icon {
 /* CONTACT SECTION */
 
 #contact {
-  display: flex;
+/*  display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 70vh;
+  height: 70vh; */
   position: relative;
 }
 
