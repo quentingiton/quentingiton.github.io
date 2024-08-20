@@ -352,6 +352,12 @@ section {
   min-width: 50vh;
 }
 
+/* TEACHING SECTION */
+
+#teaching {
+  position: relative;
+}
+
 /* PROJECTS SECTION */
 
 #projects {
