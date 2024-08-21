@@ -25,7 +25,7 @@
             related to the theories of optimal transport and partial differential
             equations, offer a promising perspective for their theoretical analysis. <br /><br />
 
-            My aim is to provide sound theoretical guarantees for the use of
+            My aim is to provide solid theoretical guarantees for the use of
             these models in data generation and density estimation,
             an aspect that is still little explored in the field of generative models.
             This advance could potentially fill an important gap and open up

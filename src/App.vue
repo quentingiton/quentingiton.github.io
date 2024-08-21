@@ -10,12 +10,12 @@ import ProfileCard from "@/components/ProfileCard.vue";
       <div class="logo">Quentin Giton</div>
       <div>
         <ul class="nav-links">
-          <li><a href="#home" class="active">Projects</a></li>
-          <li><a href="#conferences">Teaching</a></li>
-          <li><a href="#monge">Interests</a></li>
+          <li><a href="#projects" class="active">Projects</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#insterests">Interests</a></li>
           <li><a href="#posts">Posts</a></li>
-          <li><a href="#posts">Conferences</a></li>
-          <li><a href="#posts">Research</a></li>
+          <li><a href="#conferences">Conferences</a></li>
+          <li><a href="#research">Research</a></li>
         </ul>
       </div>
     </nav>
