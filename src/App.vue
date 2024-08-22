@@ -6,6 +6,7 @@ import ProfileCard from "@/components/ProfileCard.vue";
 
 <template>
   <header>
+    <link rel="stylesheet" href="/path/to/folder/css/academicons.min.css"/>
     <nav id="desktop-nav">
       <div class="logo">Quentin Giton</div>
       <div>
@@ -16,6 +17,7 @@ import ProfileCard from "@/components/ProfileCard.vue";
           <li><a href="#posts">Posts</a></li>
           <li><a href="#conferences">Conferences</a></li>
           <li><a href="#research">Research</a></li>
+          <li><a href="#home"><i class="fas fa-house" style="color: #000000;"></i></a></li>
         </ul>
       </div>
     </nav>
