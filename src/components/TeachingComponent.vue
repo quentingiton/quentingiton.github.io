@@ -12,6 +12,8 @@
           <div class="course-meta">
             <span>{{ course.instructor }}</span>
             <div class="course-links">
+              <!-- Tout ce qui suit ne fonctionne pas x) -->
+              <!-- <a href="../assets/others/L2_maths_ex_sheet.pdf" target="_blank">Exercise sheet</a> -->
               <a v-if="course.LN" :href="course.LN" class="link">Lecture notes</a>
               <a v-if="course.ES" :href="course.title" @click.prevent="openPDF(course.ES)" class="link">Exercise sheets</a>
             </div>
