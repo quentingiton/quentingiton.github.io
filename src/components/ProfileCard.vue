@@ -3,9 +3,6 @@
     <div class="profile-left">
       <img src="../assets/others/pic_Q.jpg" alt="Quentin Giton's profile picture" class="profile-image" />
 
-
-      <!-- MAT, J'AI UN PBLM D'ALIGNEMENT DES LOGOS A DROITE, J'AI BESOIN DE TON AIDE LA DESSUS STP -->
-       
       <!-- LMO link with logo -->
       <a href="https://www.imo.universite-paris-saclay.fr/fr/" target="_blank" class="logo-link">
         <div class="text-with-logo">
@@ -74,12 +71,13 @@ export default {
   width: 30%; /* Adjusted width to balance the content */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
 }
 
 .profile-image {
+  align-self: center;
   width: 150px;
-  height: 150px;          
+  height: 150px;
   object-fit: cover;      
   border-radius: 100%;
   margin-top: 30px;
@@ -103,6 +101,7 @@ h1 {
 }
 
 .logo-link {
+  width: 100%;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -111,25 +110,26 @@ h1 {
   margin-bottom: 10px;
 }
 
-
-.logo-link {
-  text-decoration: none;
-  color: purple;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  display: flex;
-  
-}
 
 .text-with-logo {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%; /* Matches the width of the profile-left */
+  padding: 5px 0;
 }
+
+.text-with-logo p {
+  text-align: left;
+  flex-grow: 1;
+
+}
+
 
 .link-logo {
   height: 30px;
+  width: auto;
   margin-left: 10px;
-  object-fit: contain;
 }
 
 .contact-icons img {

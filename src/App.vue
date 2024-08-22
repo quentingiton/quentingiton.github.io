@@ -1,6 +1,4 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 import ProfileCard from "./components/ProfileCard.vue";
 import TeachingComponent from './components/TeachingComponent.vue';
 </script>
