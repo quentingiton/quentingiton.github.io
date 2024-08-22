@@ -1,14 +1,24 @@
 <template>
   <div class="profile-card">
     <div class="profile-left">
-      <img src="../assets/ProfilePicture.png" alt="Quentin Giton's profile picture" class="profile-image" />
-<!--      create a link to https://www.imo.universite-paris-saclay.fr/fr/-->
-      <a href="https://www.imo.universite-paris-saclay.fr/fr/" target="_blank">
-        <p>LMO</p>
+      <img src="../assets/pic_Q.jpg" alt="Quentin Giton's profile picture" class="profile-image" />
+
+      <!-- LMO link with logo -->
+      <a href="https://www.imo.universite-paris-saclay.fr/fr/" target="_blank" class="logo-link">
+        <div class="text-with-logo">
+          <p>LMO</p>
+          <img src="../assets/LogoIMO.png" alt="LMO logo" class="link-logo" />
+        </div>
       </a>
-      <a href="https://www.universite-paris-saclay.fr/" target="_blank">
-        <p>Université Paris-Saclay</p>
+
+      <!-- UPS link with logo -->
+      <a href="https://www.universite-paris-saclay.fr/" target="_blank" class="logo-link">
+        <div class="text-with-logo">
+          <p>Université Paris-Saclay</p>
+          <img src="../assets/LogoParisSaclay.jpg" alt="UPS logo" class="link-logo" />
+        </div>
       </a>
+
       <div class="contact-icons">
 <!--        <img src="@/assets/email-icon.png" alt="Email" />-->
 <!--        <img src="@/assets/google-icon.png" alt="Google Scholar" />-->
@@ -66,6 +76,9 @@ export default {
 
 .profile-image {
   width: 150px;
+  height: 150px;          
+  object-fit: cover;      
+  border-radius: 100%;
   margin-top: 30px;
   margin-bottom: 20px;
 }
@@ -84,6 +97,36 @@ h1 {
 .university {
   color: #0066cc;
   margin-bottom: 10px;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: purple;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+
+.logo-link {
+  text-decoration: none;
+  color: purple;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  display: flex;
+  
+}
+
+.text-with-logo {
+  display: flex;
+  align-items: center;
+}
+
+.link-logo {
+  height: 30px;
+  margin-left: 10px;
+  object-fit: contain;
 }
 
 .contact-icons img {
