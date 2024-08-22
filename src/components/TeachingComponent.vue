@@ -3,7 +3,7 @@
       <h2 class="title">Teaching</h2>
       <div class="content">
         <div class="info-box">
-          <i class="info-icon">ℹ️</i>
+          <i class="fas fa-circle-info" style="color: #1e95ff;"></i>
           <a href="#" @click="showAllCourses">Complete list of courses here.</a>
         </div>
         <div v-for="course in recentCourses" :key="course.id" class="course-item">
