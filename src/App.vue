@@ -1,12 +1,13 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import ProfileCard from "@/components/ProfileCard.vue";
+import ProfileCard from "./components/ProfileCard.vue";
+import TeachingComponent from './components/TeachingComponent.vue';
 </script>
 
 <template>
   <header>
-    <link rel="stylesheet" href="/path/to/folder/css/academicons.min.css"/>
+    <link rel="stylesheet" href="/assets/academicons-1.9.4/css/academicons.min.css"/>
     <nav id="desktop-nav">
       <div class="logo">Quentin Giton</div>
       <div>
@@ -24,7 +25,8 @@ import ProfileCard from "@/components/ProfileCard.vue";
   </header>
 
   <main>
-    <ProfileCard />
+    <ProfileCard id="home"/>
+    <TeachingComponent id="teaching"/>
   </main>
 </template>
 
