@@ -43,7 +43,7 @@ import TeachingComponent from './components/TeachingComponent.vue';
   nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -53,6 +53,7 @@ import TeachingComponent from './components/TeachingComponent.vue';
     font-size: 28px;
     font-weight: bold;
     color: #333;
+    margin-right: auto;
   }
 
   .nav-links {

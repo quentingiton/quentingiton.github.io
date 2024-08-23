@@ -14,7 +14,7 @@
       <!-- UPS link with logo -->
       <a href="https://www.universite-paris-saclay.fr/" target="_blank" class="logo-link">
         <div class="text-with-logo">
-          <p>Université Paris-Saclay</p>
+          <p class="single-line">Université Paris-Saclay</p>
           <img src="../assets/others/LogoParisSaclay.jpg" alt="UPS logo" class="link-logo" />
         </div>
       </a>
@@ -119,10 +119,13 @@ h1 {
   padding: 5px 0;
 }
 
-.text-with-logo p {
-  text-align: left;
-  flex-grow: 1;
+.single-line {
+  white-space: nowrap;
+}
 
+.text-with-logo p {
+  text-align: right;
+  flex-grow: 1;
 }
 
 
