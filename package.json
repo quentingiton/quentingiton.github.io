@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "pdfjs-dist": "^4.5.136",
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
+    "gh-pages": "^6.1.1",
     "vite": "^5.3.1"
   }
 }
