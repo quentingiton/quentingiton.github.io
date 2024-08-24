@@ -39,8 +39,8 @@
             title: 'L2 Mathematics',
             // description: 'A comprehensive course on Vue.js fundamentals and best practices.',
             instructor: 'Luc Joseph, Quentin Giton',
-            LN: 'dist/assets/teaching/24-25/L2/LN.pdf',
-            ES: 'dist/assets/teaching/24-25/L2/ES.pdf'
+            LN: 'teaching/24-25/L2/LN.pdf',
+            ES: 'teaching/24-25/L2/ES.pdf'
           },
           // Add more courses as needed
         ]
