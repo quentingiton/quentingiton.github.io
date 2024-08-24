@@ -1,6 +1,6 @@
 <script setup>
 import ProfileCard from "./components/ProfileCard.vue";
-import TeachingComponent from './components/TeachingComponent.vue';
+import TeachingComponent from "./components/TeachingComponent.vue";
 </script>
 
 <template>
