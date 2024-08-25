@@ -12,18 +12,18 @@ import TeachingComponent from "./components/TeachingComponent.vue";
         <ul class="nav-links">
           <li><a href="#projects" class="active">Projects</a></li>
           <li><a href="#teaching">Teaching</a></li>
-          <li><a href="#insterests">Interests</a></li>
-          <li><a href="#posts">Posts</a></li>
           <li><a href="#conferences">Conferences</a></li>
-          <li><a href="#research">Research</a></li>
-          <li><a href="#home"><i class="fas fa-house" style="color: #000000;"></i></a></li>
+          <li><a href="#talks">Talks</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#"><i class="fas fa-house" style="color: #000000;"></i></a></li>
         </ul>
       </div>
     </nav>
   </header>
 
   <main>
-    <ProfileCard id="home"/>
+    <ProfileCard />
     <TeachingComponent id="teaching"/>
   </main>
 </template>
