@@ -1,6 +1,6 @@
 <script setup>
 import ProfileCard from "./components/ProfileCard.vue";
-import TeachingComponent from "./components/TeachingComponent.vue";
+import ComponentManager from "./components/ComponentManager.vue";
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import TeachingComponent from "./components/TeachingComponent.vue";
       <div class="logo">Quentin Giton</div>
       <div>
         <ul class="nav-links">
-          <li><a href="#projects" class="active">Projects</a></li>
+          <li><a href="#about" class="active">About me</a></li>
           <li><a href="#teaching">Teaching</a></li>
           <li><a href="#conferences">Conferences</a></li>
           <li><a href="#talks">Talks</a></li>
@@ -23,12 +23,16 @@ import TeachingComponent from "./components/TeachingComponent.vue";
   </header>
 
   <main>
-    <ProfileCard />
-    <TeachingComponent id="teaching"/>
+    <ProfileCard id="#about"/>
+    <ComponentManager />
   </main>
 </template>
 
 <style>
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: Arial, sans-serif;
   }
