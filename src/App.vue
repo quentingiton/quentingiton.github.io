@@ -5,7 +5,7 @@ import TeachingComponent from "./components/TeachingComponent.vue";
 
 <template>
   <header>
-    <link rel="stylesheet" href="/assets/academicons-1.9.4/css/academicons.min.css"/>
+    <link rel="stylesheet" href="../dist/academicons-1.9.4/css/academicons.min.css"/>
     <nav id="desktop-nav">
       <div class="logo">Quentin Giton</div>
       <div>

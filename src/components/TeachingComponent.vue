@@ -22,31 +22,38 @@
 </template>
 
   <script>
+  import axios from 'axios'
+
   export default {
     name: 'TeachingComponent',
     data() {
       return {
-        recentCourses: [
-          {
-            id: 1,
-            title: 'L1 Statistics',
-            instructor: 'Luc Joseph, Quentin Giton',
-            LN: 'teaching/24-25/L1/LN.pdf',
-            ES: 'teaching/24-25/L1/ES.pdf'
-          },
-          {
-            id: 2,
-            title: 'L2 Mathematics',
-            // description: 'A comprehensive course on Vue.js fundamentals and best practices.',
-            instructor: 'Luc Joseph, Quentin Giton',
-            LN: 'teaching/24-25/L2/LN.pdf',
-            ES: 'teaching/24-25/L2/ES.pdf'
-          },
-          // Add more courses as needed
-        ]
+        courses: [], // Full list
+        recentCourses: [] // Only the 4 most recent courses
       }
     },
+    created() {
+      this.loadCourses();
+    },
     methods: {
+      loadCourses() {
+        axios.get('teaching/courses.json')
+          .then(response => {
+            this.courses = response.data;
+
+            this.courses.sort((a,b) => {
+              if (a.year == b.year) {
+                return b.semester - a.semester;
+              }
+              return b.year - a.year;
+            });
+
+            this.recentCourses = this.courses.slice(0,4);
+          })
+          .catch(error => {
+            console.error("There was an error loading the courses:", error);
+          });
+      },
       showAllCourses() {
         // Create a new window
         const newWindow = window.open("", "_blank");
@@ -94,7 +101,7 @@
         `;
           
         // Add each course to the HTML content
-        this.recentCourses.forEach(course => {
+        this.courses.forEach(course => {
           htmlContent += `
             <div class="course-item">
               <h3>${course.title}</h3>

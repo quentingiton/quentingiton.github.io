@@ -1,13 +1,13 @@
 <template>
   <div class="profile-card">
     <div class="profile-left">
-      <img src="../assets/others/pic_Q.jpg" alt="Quentin Giton's profile picture" class="profile-image" />
+      <img src="../../dist/others/pic_Q.jpg" alt="Quentin Giton's profile picture" class="profile-image" />
 
       <!-- LMO link with logo -->
       <a href="https://www.imo.universite-paris-saclay.fr/fr/" target="_blank" class="logo-link">
         <div class="text-with-logo">
           <p>LMO</p>
-          <img src="../assets/others/LogoIMO.png" alt="LMO logo" class="link-logo" />
+          <img src="../../dist/others/LogoIMO.png" alt="LMO logo" class="link-logo" />
         </div>
       </a>
 
@@ -15,7 +15,7 @@
       <a href="https://www.universite-paris-saclay.fr/" target="_blank" class="logo-link">
         <div class="text-with-logo">
           <p class="single-line">Université Paris-Saclay</p>
-          <img src="../assets/others/LogoParisSaclay.jpg" alt="UPS logo" class="link-logo" />
+          <img src="../../dist/others/LogoParisSaclay.jpg" alt="UPS logo" class="link-logo" />
         </div>
       </a>
 
