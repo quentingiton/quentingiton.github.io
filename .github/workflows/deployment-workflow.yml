@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Check if dist directory exists
+        id: check_dist
+        run: |
+          if [ -d "dist" ]; then
+            echo "exists=true" >> $GITHUB_ENV
+          else
+            echo "exists=false" >> $GITHUB_ENV
+          fi
+
+      - name: Exit if dist directory does not exist
+        if: env.exists == 'false'
+        run: exit 0
+
+      - name: Deploy to GitHub Pages
+        if: env.exists == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+
+      - name: Deploy the website
+        if: env.exists == 'true'
+        run: echo "Deployment complete!"
