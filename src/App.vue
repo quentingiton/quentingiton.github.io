@@ -7,7 +7,7 @@ import TeachingComponent from "./components/TeachingComponent.vue";
   <header>
     <link rel="stylesheet" href="/assets/academicons-1.9.4/css/academicons.min.css"/>
     <nav id="desktop-nav">
-      <div class="logo">Quentin G</div>
+      <div class="logo">Quentin Giton</div>
       <div>
         <ul class="nav-links">
           <li><a href="#projects" class="active">Projects</a></li>
