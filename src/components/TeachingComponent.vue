@@ -31,8 +31,8 @@
             id: 1,
             title: 'L1 Statistics',
             instructor: 'Luc Joseph, Quentin Giton',
-            LN: 'src/assets/teaching/24-25/L1/LN.pdf',
-            ES: 'src/assets/teaching/24-25/L1/ES.pdf'
+            LN: 'teaching/24-25/L1/LN.pdf',
+            ES: 'teaching/24-25/L1/ES.pdf'
           },
           {
             id: 2,
