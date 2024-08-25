@@ -10,7 +10,7 @@
         <h3>{{ course.title }}</h3>
         <p>{{ course.description }}</p>
         <div class="course-meta">
-          <span>{{ course.instructor }}</span>
+          <span>{{ course.instructors }}</span>
           <div class="course-links">
             <a v-if="course.LN" @click="() => openPDF(course.LN)" class="link">Lecture notes</a>
             <a v-if="course.ES" @click="() => openPDF(course.ES)" class="link">Exercise sheets</a>
@@ -105,7 +105,7 @@
           htmlContent += `
             <div class="course-item">
               <h3>${course.title}</h3>
-              <p>Instructors: ${course.instructor}</p>
+              <p>Instructors: ${course.instructors}</p>
               <div class="course-meta">
                 <div class="course-links">
                   ${course.LN ? `<a href="${course.LN}" class="link" target="_blank">Lecture notes</a>` : ''}
