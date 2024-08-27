@@ -42,6 +42,13 @@ import ComponentManager from "./components/ComponentManager.vue";
     background-color: white;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  main {
+    margin-top: 60px;
   }
 
   nav {
