@@ -10,11 +10,10 @@ import ComponentManager from "./components/ComponentManager.vue";
       <div class="logo">Quentin Giton</div>
       <div>
         <ul class="nav-links">
-          <li><a href="#about" class="active">About me</a></li>
           <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#publications">Publications</a></li>
           <li><a href="#conferences">Conferences</a></li>
           <li><a href="#talks">Talks</a></li>
-          <li><a href="#publications">Publications</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#"><i class="fas fa-house" style="color: #000000;"></i></a></li>
         </ul>

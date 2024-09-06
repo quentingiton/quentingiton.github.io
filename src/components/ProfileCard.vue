@@ -26,7 +26,7 @@
     </div>
     <div class="profile-right">
       <h1>Quentin Giton</h1>
-      <p>Doctoral student in Mathematics at University of Paris-Saclay</p>
+      <p>PhD student in Mathematics at University of Paris-Saclay</p>
       <h2>About me</h2>
         <div class="text-container">
           <p>
