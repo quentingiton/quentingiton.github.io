@@ -1,23 +1,41 @@
 <template>
-    <div class="publi-container">
-      <h2 class="title">Publications</h2>
-      <div class="content">
-        <div class="info-box">
-          <i class="fas fa-circle-info" style="color: #1e95ff;"></i>
-          <p>You can find the complete list of my publications <a href="#" @click="showAllPublis">here</a></p>
-        </div>
-        <div v-for="publi in recentPublis" :key="publi.id" class="publi-item">
-          <h3>{{ publi.title }}</h3>
-          <div class="publi-meta">
-            <span>{{ publi.authors }}</span>
-            <div class="publi-links">
-              <a v-if="publi.file" @click="() => openPDF(publi.file)" class="link">PDF</a>
-            </div>
+  <div class="publi-container">
+    <h2 class="title">
+      Publications
+    </h2>
+    <div class="content">
+      <div class="info-box">
+        <i
+          class="fas fa-circle-info"
+          style="color: #1e95ff;"
+        />
+        <p>
+          You can find the complete list of my publications <a
+            href="#"
+            @click="showAllPublis"
+          >here</a>
+        </p>
+      </div>
+      <div
+        v-for="publi in recentPublis"
+        :key="publi.id"
+        class="publi-item"
+      >
+        <h3>{{ publi.title }}</h3>
+        <div class="publi-meta">
+          <span>{{ publi.authors }}</span>
+          <div class="publi-links">
+            <a
+              v-if="publi.file"
+              class="link"
+              @click="() => openPDF(publi.file)"
+            >PDF</a>
           </div>
         </div>
       </div>
     </div>
-  </template>
+  </div>
+</template>
   
     <script>
     import axios from 'axios'

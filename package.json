@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "lint": "eslint",
+    "lint-fix": "eslint --fix",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -17,6 +19,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
+    "eslint": "^9.20.1",
+    "eslint-plugin-vue": "^9.32.0",
     "gh-pages": "^6.1.1",
     "vite": "^5.3.1"
   }

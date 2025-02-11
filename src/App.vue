@@ -5,9 +5,11 @@ import ComponentManager from "./components/ComponentManager.vue";
 
 <template>
   <header>
-    <link rel="stylesheet" href="../dist/academicons-1.9.4/css/academicons.min.css"/>
+    <!-- <link rel="stylesheet" href="../dist/academicons-1.9.4/css/academicons.min.css"/> -->
     <nav id="desktop-nav">
-      <div class="logo">Quentin Giton</div>
+      <div class="logo">
+        Quentin Giton
+      </div>
       <div>
         <ul class="nav-links">
           <li><a href="#teaching">Teaching</a></li>
@@ -15,14 +17,19 @@ import ComponentManager from "./components/ComponentManager.vue";
           <li><a href="#conferences">Conferences</a></li>
           <!-- <li><a href="#talks">Talks</a></li> -->
           <!-- <li><a href="#contact">Contact</a></li> -->
-          <li><a href="#"><i class="fas fa-house" style="color: #000000;"></i></a></li>
+          <li>
+            <a href="/"><i
+              class="fas fa-house"
+              style="color: #000000;"
+            /></a>
+          </li>
         </ul>
       </div>
     </nav>
   </header>
 
   <main>
-    <ProfileCard id="#about"/>
+    <ProfileCard id="#about" />
     <ComponentManager />
   </main>
 </template>
