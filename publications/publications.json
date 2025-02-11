@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "year": 24,
+        "month": 9,
+        "title": "M2 internship report",
+        "authors": "Quentin Giton",
+        "file": "../dist/publications/24/internship.pdf"
+    }
+]
