@@ -2,23 +2,27 @@
   <div class="container">
     <div class="column-left">
       <img
-        src="@/images/quentin_profile.jpg"
+        src="@/assets/images/quentin_profile.jpg"
         alt="Quentin Giton's profile picture"
         class="profile-image"
       >
       <div class="profile-infos">
-        <h1 class="title">Quentin Giton</h1>
-        <p class="subtitle">PhD student in Mathematics at 
+        <h1 class="title">
+          Quentin Giton
+        </h1>
+        <p class="subtitle">
+          PhD student in Mathematics at 
           <a
-          href="https://www.imo.universite-paris-saclay.fr/fr/"
-          target="_blank"
-        >University of Paris-Saclay
-      </a></p>
+            href="https://www.imo.universite-paris-saclay.fr/fr/"
+            target="_blank"
+          >University of Paris-Saclay
+          </a>
+        </p>
       </div>      
 
       <div class="contact-icons">
-        <a href="mailto:quentin.giton@universite-paris-saclay.fr"><i class="fa-solid fa-square-envelope fa-2x"></i></a>
-        <a href="https://scholar.google.fr/"><i class="ai ai-google-scholar-square ai-2x"></i></a>
+        <a href="mailto:quentin.giton@universite-paris-saclay.fr"><i class="fa-solid fa-square-envelope fa-2x" /></a>
+        <a href="https://scholar.google.fr/"><i class="ai ai-google-scholar-square ai-2x" /></a>
       </div>
     </div>
     <div class="column-right">
@@ -50,7 +54,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+@import "@/assets/less/variables.less";
+
 .profile-image {
   align-self: center;
   width: 200px;
@@ -81,7 +87,7 @@ export default {
   width: 100%;
   align-items: center;
   justify-content: center;
-  color: #63B0F2;
+  color: @accent-blue;
 }
 
 .contact-icons i {

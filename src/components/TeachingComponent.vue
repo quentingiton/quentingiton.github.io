@@ -1,29 +1,28 @@
 <template>
-  <div class="container">
-    <div class="column-left">
-      <h1 class="title">
-        Teaching
-      </h1>
-    </div>
-    <div class="column-right">
-      <div class="content">
-        <div class="info-box">
-          <i
-            class="fas fa-circle-info"
-            style="color: #1e95ff;"
+  <div class="fullpage">
+    <div class="container">
+      <div class="column-left">
+        <h1 class="section-title">
+          Teaching
+        </h1>
+      </div>
+      <div class="column-right">
+        <div class="content">
+          <div class="info-box">
+            <i class="fas fa-circle-info" />
+            <p>
+              You can find the complete list of courses <a
+                href="#"
+                @click="showAllCourses"
+              >here</a>
+            </p>
+          </div>
+          <CourseComponent
+            v-for="course in recentCourses"
+            :key="course.id"
+            :course="course"
           />
-          <p>
-            You can find the complete list of courses <a
-              href="#"
-              @click="showAllCourses"
-            >here</a>
-          </p>
         </div>
-        <CourseComponent
-          v-for="course in recentCourses"
-          :key="course.id"
-          :course="course"
-        />
       </div>
     </div>
   </div>
@@ -33,10 +32,17 @@
   import CourseComponent from './CourseComponent.vue';
 
   const props = defineProps({
-    courses: Array,
+    courses: {
+      type: Array,
+      default(rawProps) {
+        return []
+      },
+    }
   });
 
-  const recentCourses = props.courses
+  const { courses } = props;
+
+  const recentCourses = courses
     .sort((a,b) => {
     if (a.year == b.year) {
       return b.semester - a.semester;
@@ -128,26 +134,10 @@
   // }
   </script>
 
-  <style scoped>
-  .content {
-    flex: 2;
-  }
+<style lang="less" scoped>
+@import "@/assets/less/variables.less";
 
-  .info-box {
-    background-color: #e6f3ff;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    max-width: max-content; /* Ensures the box wraps tightly around the text */
-    display: flex; /* Ensures icon and text stay aligned */
-    align-items: center; /* Vertically center the icon with the text */
-  }
-
-  .info-box p {
-    margin-left: 5px; /* Add a small margin between the icon and the text */
-  }
-
-  .info-icon {
-    margin-right: 5px;
-  }
-  </style>
+.fullpage {
+  /* background-color: #eeeeee99; */
+}
+</style>

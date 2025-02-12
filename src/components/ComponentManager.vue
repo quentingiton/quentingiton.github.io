@@ -16,10 +16,10 @@
   
   <script>
   import TeachingComponent from "./TeachingComponent.vue";
-  import courses from "@/json/teaching.json";
+  import courses from "@/assets/json/teaching.json";
 
   import PublicationsComponent from "./PublicationsComponent.vue";
-  import publis from "@/json/publications.json";
+  import publis from "@/assets/json/publications.json";
   
   export default {
     components: {
@@ -40,9 +40,13 @@
     methods: {
       checkInfos() {
         // Check if each JSON file is empty
-        this.isCoursesEmpty = !courses || Object.keys(courses).length === 0;
-        this.isPublisEmpty = !publis || Object.keys(publis).length ===0;
+        this.isCoursesEmpty = isEmpty(courses);
+        this.isPublisEmpty = isEmpty(publis);
       }
     }
+  }
+
+  function isEmpty(arr) {
+    return !arr || Object.keys(arr).length ===0;
   }
   </script>

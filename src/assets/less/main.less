@@ -1,0 +1,73 @@
+@import "variables.less";
+
+.container {
+    display: flex;
+    align-items: flex-start; /* Align items at the start (top) */
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+  
+  .column-left {
+    text-align: left;
+    width: 30%; /* Adjusted width to balance the content */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .column-right {
+    width: 65%; /* Adjusted width to balance the content */
+    align-items: center;
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  }
+
+  a {
+    text-decoration: none !important;
+    cursor: pointer;
+    color: @accent-blue;
+  }
+
+  .section-title {
+    margin-right: 15px;
+  }
+
+  .container{
+    border-top: 1px solid @border-grey;
+  }
+
+  .info-box {
+    background-color: @light-blue;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex; /* Ensures icon and text stay aligned */
+    align-items: center; /* Vertically center the icon with the text */
+    justify-content: flex-start;
+    gap: 10px;
+
+    i {
+      margin-left: 10px;
+      color: @accent-blue;
+    }
+  }
+
+  .content {
+    flex: 2;
+  }

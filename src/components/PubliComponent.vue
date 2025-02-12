@@ -1,19 +1,13 @@
 <template>
   <div class="course-item">
-    <h3>{{ course.title }}</h3>
-    <p>{{ course.description }}</p>
+    <h3>{{ publi.title }}</h3>
     <div class="course-meta">
-      <span>{{ course.instructors }}</span>
+      <span>{{ publi.authors }}</span>
       <div class="course-links">
         <ButtonComponent
-          v-if="course.LN"
-          text="Lecture Notes"
-          :link="course.LN"
-        />
-        <ButtonComponent
-          v-if="course.ES"
-          text="Exercise sheets"
-          :link="course.ES"
+          v-if="publi.file"
+          text="PDF"
+          :link="publi.file"
         />
       </div>
     </div>
@@ -24,7 +18,7 @@
 import ButtonComponent from './ButtonComponent.vue';
 
 const props = defineProps({
-  course: {
+  publi: {
     type: Object,
     default(rawProps) {
       return {}

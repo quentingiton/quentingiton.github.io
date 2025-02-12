@@ -5,6 +5,6 @@
         "month": 9,
         "title": "M2 internship report",
         "authors": "Quentin Giton",
-        "file": "../dist/publications/24/internship.pdf"
+        "file": "@/assets/pdf/publications/24/internship.pdf"
     }
 ]
