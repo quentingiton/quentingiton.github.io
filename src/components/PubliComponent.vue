@@ -1,11 +1,13 @@
 <template>
   <div class="course-item">
-    <h3>{{ publi.title }}</h3>
-    <div class="course-meta">
-      <span>{{ publi.authors }}</span>
+    <div class="title-with-buttons">
+      <h2>{{ publi.title }}</h2>
       <div class="course-links">
         <ButtonComponent v-if="publi.file" text="PDF" :link="publi.file" />
       </div>
+    </div>
+    <div class="course-meta">
+      <span>{{ publi.authors }}</span>
     </div>
   </div>
 </template>
@@ -29,32 +31,3 @@ function openPDF(pdfUrl) {
   window.open(pdfUrl, "_blank");
 }
 </script>
-
-<style lang="less" scoped>
-@import "@/assets/less/variables.less";
-
-.course-item {
-  margin-bottom: 20px;
-}
-
-.course-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9em;
-}
-
-.course-links .link {
-  margin-left: 10px;
-  color: @accent-blue;
-  text-decoration: none;
-}
-
-.course-links .link:hover {
-  text-decoration: underline;
-}
-
-.link {
-  cursor: pointer;
-}
-</style>

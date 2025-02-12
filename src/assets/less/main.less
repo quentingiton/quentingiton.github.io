@@ -21,6 +21,7 @@
 h1 {
   font-size: 24px;
   margin-bottom: 10px;
+  margin-top: 5px;
 }
 
 .column-right {
@@ -29,11 +30,13 @@ h1 {
 
   p {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 0;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
 }
@@ -54,7 +57,6 @@ a {
 
 .info-box {
   background-color: @light-blue;
-  padding: 5px;
   border-radius: 5px;
   width: 100%;
   display: flex; /* Ensures icon and text stay aligned */
@@ -66,8 +68,40 @@ a {
     margin-left: 10px;
     color: @accent-blue;
   }
+
+  p {
+    margin: 5px;
+    padding: 5px;
+  }
 }
 
 .content {
   flex: 2;
+}
+
+.course-item {
+  margin-bottom: 20px;
+}
+
+.title-with-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.course-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: @light-grey;
+}
+
+.course-links {
+  display: flex;
+  gap: 5px;
+}
+
+.link {
+  cursor: pointer;
 }

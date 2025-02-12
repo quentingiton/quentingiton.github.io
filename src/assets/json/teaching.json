@@ -4,19 +4,19 @@
     "year": 2425,
     "semester": 2,
     "title": "L1 Statistics",
-    "description": "Lorem Ipsum",
+    "description": "2024/2025 - Faculté Jean Monnet",
     "instructors": "Luc Joseph, Quentin Giton",
-    "LN": "@/assets/pdf/teaching/24-25/L1/LN.pdf",
-    "ES": "@/assets/pdf/teaching/24-25/L1/ES.pdf"
+    "LN": "./src/assets/pdf/teaching/24-25/L1/LN.pdf",
+    "ES": "./src/assets/pdf/teaching/24-25/L1/ES.pdf"
   },
   {
     "id": 2,
     "year": 2425,
     "semester": 1,
     "title": "L2 Mathematics",
-    "description": "Lorem Ipsum",
+    "description": "2024/2025 - Faculté Jean Monnet",
     "instructors": "Luc Joseph, Quentin Giton",
-    "LN": "@/assets/pdf/teaching/24-25/L2/LN.pdf",
-    "ES": "@/assets/pdf/teaching/24-25/L2/ES.pdf"
+    "LN": "./src/assets/pdf/teaching/24-25/L2/LN.pdf",
+    "ES": "./src/assets/pdf/teaching/24-25/L2/ES.pdf"
   }
 ]
