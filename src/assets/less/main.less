@@ -8,6 +8,7 @@
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
+  color: @text-color;
 }
 
 .column-left {
@@ -117,12 +118,12 @@ body {
 header {
   font-family: "Poppins", sans-serif;
   background-color: white;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid @border-grey;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: 75px;
 }
 
 main {
@@ -136,13 +137,18 @@ nav {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  height: 100%;
 }
 
 .logo {
   font-size: 28px;
   font-weight: bold;
-  color: #333;
   margin-right: auto;
+
+  a {
+    text-decoration: none !important;
+    color: @text-color;
+  }
 }
 
 .nav-links {
@@ -150,20 +156,19 @@ nav {
   display: flex;
   gap: 15px;
 
-  li {
-    position: relative;
+  i {
+    color: @text-color;
   }
 
   a {
-    text-decoration: none;
-    color: #333;
+    text-decoration: none !important;
     font-size: 18px;
     padding: 5px 10px;
+    color: @text-color;
   }
 
-  a.active {
-    color: #0066cc;
-    font-weight: bold;
+  .link-active {
+    color: @accent-color;
   }
 }
 
