@@ -1,7 +1,5 @@
 <template>
-  <a :href="link" class="button" target="_blank" rel="noopener noreferrer">{{
-    text
-  }}</a>
+  <button class="button" @click="onclick()">{{ text }}</button>
 </template>
 
 <script setup>
@@ -10,9 +8,11 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  link: {
-    type: String,
-    default: "",
+  onclick: {
+    type: Function,
+    default() {
+      return "Default function";
+    },
   },
 });
 </script>

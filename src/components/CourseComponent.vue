@@ -6,16 +6,18 @@
         <ButtonComponent
           v-if="course.LN"
           text="Lecture Notes"
-          :link="course.LN"
+          :onclick="() => openUrl(course.LN)"
         />
         <ButtonComponent
           v-if="course.ES"
           text="Exercise sheets"
-          :link="course.ES"
+          :onclick="() => openUrl(course.ES)"
         />
       </div>
     </div>
-    <p>{{ course.description }}</p>
+    <div class="text-container">
+      <p v-if="course.description">{{ course.description }}</p>
+    </div>
     <div class="course-meta">
       <span>{{ course.instructors }}</span>
     </div>
@@ -34,10 +36,7 @@ const props = defineProps({
   },
 });
 
-function openPDF(pdfUrl) {
-  // TODO fixme
-  // Implement the logic to open the PDF
-  console.log("Opening PDF:", pdfUrl);
-  window.open(pdfUrl, "_blank");
+function openUrl(link) {
+  window.open(link, "_blank");
 }
 </script>

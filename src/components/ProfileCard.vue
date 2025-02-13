@@ -96,9 +96,4 @@ export default {
 .contact-icons i {
   margin: 5px;
 }
-
-.text-container p {
-  text-align: justify;
-  line-height: 1.6;
-}
 </style>
