@@ -1,24 +1,22 @@
 <template>
-  <div class="fullpage">
-    <div class="container">
-      <div class="column-left">
-        <h1 class="section-title">Teaching</h1>
-      </div>
-      <div class="column-right">
-        <div class="content">
-          <div class="info-box">
-            <i class="fas fa-circle-info" />
-            <p>
-              You can find the complete list of courses
-              <RouterLink to="/teaching" courses="allCourses">here</RouterLink>
-            </p>
-          </div>
-          <CourseComponent
-            v-for="course in recentCourses"
-            :key="course.id"
-            :course="course"
-          />
+  <div class="container">
+    <div class="column-left">
+      <h1 class="section-title">Teaching</h1>
+    </div>
+    <div class="column-right">
+      <div class="content">
+        <div class="info-box">
+          <i class="fas fa-circle-info" />
+          <p>
+            You can find the complete list of courses
+            <RouterLink to="/teaching" courses="allCourses">here</RouterLink>
+          </p>
         </div>
+        <CourseComponent
+          v-for="course in recentCourses"
+          :key="course.id"
+          :course="course"
+        />
       </div>
     </div>
   </div>

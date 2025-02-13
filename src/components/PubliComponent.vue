@@ -26,9 +26,9 @@
     </div>
     <div class="text-container">
       <p
+        v-if="publi.abstract"
         :id="`publi-${publi.id}`"
         class="course-abstract ellipsis"
-        v-if="publi.abstract"
       >
         {{ publi.abstract }}
       </p>
@@ -40,7 +40,7 @@
 
   <Teleport to="body">
     <!-- use the modal component, pass in the prop -->
-    <modal :show="showModal" @close="showModal = false">
+    <ModalComponent :show="showModal" @close="showModal = false">
       <template #header>
         <h3>Cite this publication</h3>
       </template>
@@ -57,13 +57,13 @@
           </ButtonComponent>
         </div>
       </template>
-    </modal>
+    </ModalComponent>
   </Teleport>
 </template>
 
 <script setup>
 import ButtonComponent from "./ButtonComponent.vue";
-import Modal from "./Modal.vue";
+import ModalComponent from "./ModalComponent.vue";
 import { ref } from "vue";
 import ClipboardIcon from "@/assets/icons/ClipboardIcon.vue";
 

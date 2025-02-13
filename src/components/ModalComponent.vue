@@ -28,6 +28,8 @@ import ButtonComponent from "./ButtonComponent.vue";
 const props = defineProps({
   show: Boolean,
 });
+
+const emit = defineEmits(["close"]);
 </script>
 
 <style lang="less">

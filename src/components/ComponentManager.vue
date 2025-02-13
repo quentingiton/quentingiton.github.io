@@ -1,17 +1,11 @@
 <template>
-  <div>
-    <!-- Conditionally render components based on whether their JSON files are empty or not -->
-    <TeachingComponent
-      v-if="!isCoursesEmpty"
-      id="teaching"
-      :courses="courses"
-    />
-    <PublicationsComponent
-      v-if="!isPublisEmpty"
-      id="publications"
-      :publis="publis"
-    />
-  </div>
+  <!-- Conditionally render components based on whether their JSON files are empty or not -->
+  <TeachingComponent v-if="!isCoursesEmpty" id="teaching" :courses="courses" />
+  <PublicationsComponent
+    v-if="!isPublisEmpty"
+    id="publications"
+    :publis="publis"
+  />
 </template>
 
 <script>
