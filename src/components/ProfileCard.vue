@@ -13,6 +13,7 @@
           <a
             href="https://www.imo.universite-paris-saclay.fr/fr/"
             target="_blank"
+            rel="noopener noreferrer"
             >University of Paris-Saclay
           </a>
         </p>
@@ -22,7 +23,10 @@
         <a href="mailto:quentin.giton@universite-paris-saclay.fr"
           ><i class="fa-solid fa-square-envelope fa-2x"
         /></a>
-        <a href="https://scholar.google.fr/"
+        <a
+          href="https://scholar.google.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
           ><i class="ai ai-google-scholar-square ai-2x"
         /></a>
       </div>

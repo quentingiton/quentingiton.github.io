@@ -6,7 +6,7 @@
     "title": "M2 internship report",
     "authors": "Quentin Giton",
     "file": "./src/assets/pdf/publications/24/internship.pdf",
-    "abstract": "SGD with decreasing entropic regularization on semi-discrete OT is efficient! In this work, (i) we prove an O(1/t) lower bound rate for the OT map, using the similarity between Laguerre cells estimation and density support estimation, and (ii) we propose a Stochastic Gradient Descent (SGD) algorithm with adaptive entropic regularization and averaging acceleration. Moreover, while being as computationally and memory efficient as vanilla SGD, our algorithm achieves the unusual fast rates of our theory in numerical experiments. Click on the title to read the abstract.",
-    "citation": "@misc{genans2024semidiscreteoptimaltransportnearly,\n      title={Semi-Discrete Optimal Transport: Nearly Minimax Estimation With Stochastic Gradient Descent and Adaptive Entropic Regularization},\n      author={Ferdinand Genans and Antoine Godichon-Baggioni and François-Xavier Vialard and Olivier Wintenberger},\n      year={2024},\n      eprint={2405.14459},\n      archivePrefix={arXiv},\n      primaryClass={stat.ML},\n      url={https://arxiv.org/abs/2405.14459},\n}"
+    "abstract": "",
+    "citation": ""
   }
 ]

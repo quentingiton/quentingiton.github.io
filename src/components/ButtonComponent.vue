@@ -1,5 +1,8 @@
 <template>
-  <button class="button" @click="onclick()">{{ text }}</button>
+  <button class="button" @click="onclick()">
+    <slot></slot>
+    {{ text }}
+  </button>
 </template>
 
 <script setup>
@@ -28,6 +31,7 @@ const props = defineProps({
   border-radius: 5px;
   border: 1px solid @accent-color;
   font-size: small;
+  cursor: pointer;
 
   &:hover {
     background-color: @accent-color;
