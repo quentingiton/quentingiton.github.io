@@ -90,7 +90,7 @@ export default {
   width: 100%;
   align-items: center;
   justify-content: center;
-  color: @accent-blue;
+  color: @accent-color;
 }
 
 .contact-icons i {

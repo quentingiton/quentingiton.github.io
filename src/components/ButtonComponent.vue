@@ -22,15 +22,15 @@ const props = defineProps({
 
 .button {
   text-decoration: none !important;
-  color: @accent-blue;
+  color: @accent-color;
   padding: 5px;
   background-color: white;
   border-radius: 5px;
-  border: 1px solid @accent-blue;
+  border: 1px solid @accent-color;
   font-size: small;
 
   &:hover {
-    background-color: @accent-blue;
+    background-color: @accent-color;
     color: white;
   }
 }
