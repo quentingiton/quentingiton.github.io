@@ -9,6 +9,9 @@
         <RouterLink to="/publications" active-class="link-active"
           >Publications</RouterLink
         >
+        <RouterLink to="/notes" active-class="link-active"
+          >Notes</RouterLink
+        >
         <RouterLink to="/"><i class="fas fa-house"></i></RouterLink>
       </div>
     </nav>

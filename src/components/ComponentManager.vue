@@ -1,10 +1,18 @@
 <template>
   <!-- Conditionally render components based on whether their JSON files are empty or not -->
-  <TeachingComponent v-if="!isCoursesEmpty" id="teaching" :courses="courses" />
+  <TeachingComponent
+    v-if="!isCoursesEmpty"
+    id="teaching"
+    :courses="courses" />
   <PublicationsComponent
     v-if="!isPublisEmpty"
     id="publications"
     :publis="publis"
+  />
+  <ShortNotesComponent
+    v-if="!isNotesEmpty"
+    id="notes"
+    :notes="notes"
   />
 </template>
 
@@ -15,10 +23,14 @@ import courses from "@/assets/json/teaching.json";
 import PublicationsComponent from "./PublicationsComponent.vue";
 import publis from "@/assets/json/publications.json";
 
+import ShortNotesComponent from "./ShortNotesComponent.vue";
+import notes from "@/assets/json/notes.json";
+
 export default {
   components: {
     TeachingComponent,
     PublicationsComponent,
+    ShortNotesComponent,
   },
   data() {
     return {
@@ -26,6 +38,8 @@ export default {
       isCoursesEmpty: true,
       publis,
       isPublisEmpty: true,
+      notes,
+      isNotesEmpty: true,
     };
   },
   created() {
@@ -36,6 +50,7 @@ export default {
       // Check if each JSON file is empty
       this.isCoursesEmpty = isEmpty(courses);
       this.isPublisEmpty = isEmpty(publis);
+      this.isNotesEmpty = isEmpty(notes);
     },
   },
 };

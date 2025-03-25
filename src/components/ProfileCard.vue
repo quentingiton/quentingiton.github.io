@@ -24,7 +24,7 @@
           ><i class="fa-solid fa-square-envelope fa-2x"
         /></a>
         <a
-          href="https://scholar.google.fr/"
+          href="https://scholar.google.com/citations?user=Q4aM2vkAAAAJ&hl=en"
           target="_blank"
           rel="noopener noreferrer"
           ><i class="ai ai-google-scholar-square ai-2x"
