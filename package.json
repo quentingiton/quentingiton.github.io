@@ -7,7 +7,7 @@
     "dev": "vite",
     "lint": "eslint",
     "lint-fix": "eslint --fix",
-    "build": "vite build",
+    "build": "vite build && node -e \"require('fs').copyFleSync('dist/index.html', 'dist/404.html')\"",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
