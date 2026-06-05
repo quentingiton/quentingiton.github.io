@@ -4,12 +4,19 @@ import HomeView from "@/views/HomeView.vue";
 import TeachingView from "@/views/TeachingView.vue";
 import PublicationsView from "@/views/PublicationsView.vue";
 import NotesView from "@/views/NotesView.vue";
+import ScriptsView from "@/views/ScriptsView.vue";
+import LinearRegressionView from "@/views/LinearRegressionView.vue";
+import OneDLaguerreCellsView from "@/views/OneDLaguerreCellsView.vue";
 
 const routes = [
   { path: "/", component: HomeView },
   { path: "/teaching", component: TeachingView },
   { path: "/publications", component: PublicationsView },
   { path: "/notes", component: NotesView },
+  { path: "/scripts", component: ScriptsView},
+
+  { path: "/scripts/linear-regression", component: LinearRegressionView },
+  { path: "/scripts/1d-laguerre-cells", component: OneDLaguerreCellsView },
 ];
 
 const router = createRouter({

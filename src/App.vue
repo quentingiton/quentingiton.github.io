@@ -21,6 +21,7 @@
         :notes="notes"
           >Notes</RouterLink
         >
+        <RouterLink to="/scripts" active-class="link-active">Scripts</RouterLink>
         <RouterLink to="/"><i class="fas fa-house"></i></RouterLink>
       </div>
     </nav>
