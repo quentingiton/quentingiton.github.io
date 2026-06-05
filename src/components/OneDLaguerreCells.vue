@@ -38,7 +38,7 @@ const t1 = ref(0.0);
 const t2 = ref(0.0);
 const t3 = ref(0.0);
 const isOptimizing = ref(false);
-const btnText = ref('Optimiser les Thetas !');
+const btnText = ref('Optimise!');
 
 const c1 = -2, c2 = 0, c3 = 1;
 
@@ -145,9 +145,7 @@ const drawPlot = () => {
     xaxis2: { domain: [0.82, 1] },
     yaxis2: { anchor: 'x2', range: [0, 0.6], title: 'Masses' },
     shapes: [
-      // Base line for density plot
       { type: 'line', xref: 'x1', yref: 'y1', x0: -4, x1: 3.5, y0: 0, y1: 0, line: { color: 'black', width: 1 } },
-      // Target line for bar chart (1/3)
       { type: 'line', xref: 'x2', yref: 'y2', x0: -0.5, x1: 2.5, y0: 1/3, y1: 1/3, line: { color: '#d77e62', dash: 'dash' } }
     ],
     annotations: [
@@ -160,8 +158,22 @@ const drawPlot = () => {
   Plotly.react(plotContainer.value, traces, layout);
 };
 
+
+let isDrawing = false;
+
 watch([t1, t2, t3], () => {
-  drawPlot();
+  
+  if (isDrawing) return;
+  
+  isDrawing = true;
+  
+  requestAnimationFrame(() => {
+    if (plotContainer.value) {
+      drawPlot();
+    }
+    
+    isDrawing = false;
+  });
 });
 
 onMounted(() => {
@@ -174,7 +186,7 @@ const delay = (ms) => new Promise(res => setTimeout(res, ms));
 const animateOptimization = async () => {
   if (isOptimizing.value) return;
   isOptimizing.value = true;
-  btnText.value = "Calcul en cours...";
+  btnText.value = "Optimising...";
   
   let opt_t2 = t2.value;
   let opt_t3 = t3.value;
@@ -207,7 +219,7 @@ const animateOptimization = async () => {
     await delay(pauseTime);
   }
 
-  btnText.value = "Optimiser les Thetas !";
+  btnText.value = "Optimise!";
   isOptimizing.value = false;
 };
 </script>
@@ -237,6 +249,7 @@ const animateOptimization = async () => {
 input[type=range] {
   flex-grow: 1;
   margin: 0 15px;
+  accent-color: #dd9ea4;
 }
 .value-display {
   width: 50px;
@@ -244,7 +257,7 @@ input[type=range] {
   font-family: monospace;
 }
 button {
-  background: #D77E62;
+  background: #dd9ea4;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -255,6 +268,6 @@ button {
   font-weight: bold;
   transition: background 0.3s;
 }
-button:hover { background: #B7654B; }
+button:hover { background: #eecacc; }
 button:disabled { background: #ccc; cursor: not-allowed; }
 </style>

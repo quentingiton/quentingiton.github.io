@@ -10,7 +10,7 @@
     
     <div class="column-right">
       <div class="content">
-        <p>Adjust the under parameters or clic on the optimise button to visualise the minimisation of the Mean Square Error (MSE) in live-action!</p>
+        <p>Adjust the under parameters or clic on the Optimise! button to visualise the minimisation of the Mean Square Error (MSE) in live-action!</p>
         
         <LinearRegression />
         

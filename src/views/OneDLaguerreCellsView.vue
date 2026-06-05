@@ -9,7 +9,7 @@
     </div>
     <div class="column-right">
       <div class="content">
-        <p>Adjust the Kantorovich potentials values and try to equate the three areas. Or use the optimise button (but that's cheating)</p>
+        <p>Adjust the Kantorovich potentials values and try to equate the three areas. Or use the Optimise! button (but that's cheating)</p>
         <OneDLaguerreCells /> 
       </div>
     </div>

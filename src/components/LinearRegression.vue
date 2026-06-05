@@ -8,13 +8,13 @@
 
     <div class="controls">
       <div class="slider-row">
-        <label>Pente (m):</label>
+        <label>Slope (a):</label>
         <input type="range" v-model.number="m" min="-3" max="5" step="0.01">
         <span class="value-display">{{ m.toFixed(2) }}</span>
       </div>
       
       <div class="slider-row">
-        <label>Ordonnée (b):</label>
+        <label>Intercept (b):</label>
         <input type="range" v-model.number="b" min="-5" max="30" step="0.1">
         <span class="value-display">{{ b.toFixed(1) }}</span>
       </div>
@@ -80,8 +80,21 @@ const drawPlot = () => {
   Plotly.react(plotContainer.value, traces, layout);
 };
 
+let isDrawing = false;
+
 watch([m, b], () => {
-  drawPlot();
+  
+  if (isDrawing) return;
+  
+  isDrawing = true;
+  
+  requestAnimationFrame(() => {
+    if (plotContainer.value) {
+      drawPlot();
+    }
+    
+    isDrawing = false;
+  });
 });
 
 onMounted(() => {
@@ -147,6 +160,7 @@ const animateOptimization = async () => {
 input[type=range] {
   flex-grow: 1;
   margin: 0 15px;
+  accent-color: #dd9ea4;
 }
 .value-display {
   width: 50px;
@@ -154,7 +168,7 @@ input[type=range] {
   font-family: monospace;
 }
 button {
-  background: #D77E62;
+  background: #dd9ea4;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -165,6 +179,6 @@ button {
   font-weight: bold;
   transition: opacity 0.3s;
 }
-button:hover { background: #B7654B; }
+button:hover { background: #eecacc; }
 button:disabled { background: #ccc; cursor: not-allowed; }
 </style>
