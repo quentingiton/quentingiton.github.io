@@ -35,20 +35,18 @@
       <h1>About me</h1>
       <div class="text-container">
         <p>
-          My research focuses on a particular type of generative model:
-          continuous normalising flows. These models, which are closely related
-          to the theories of optimal transport and partial differential
-          equations, offer a promising perspective for their theoretical
-          analysis. <br /><br />
+          I'm working on Lagragian schemes to simulate continuity 
+          equation-type PDEs using their formulation as Wasserstein gradient flows.
+          This topic is close to the theories of (semi-discrete) optimal transport, 
+          PDEs (of course) and calculus of variations. <br /><br />
 
-          My aim is to provide solid theoretical guarantees for the use of these
-          models in data generation and density estimation, an aspect that is
-          still little explored in the field of generative models. This advance
-          could potentially fill an important gap and open up new avenues for
-          safe and robust applications. <br /><br />
+          Such particulate schemes can also be usefull in providing
+          theoretical guarantees to some training methods
+          of some generative models as normalising flows, diffusion 
+          models or flow-matching models for instance. <br /><br />
 
-          If you are interested in this topic or would like to discuss it
-          further, please do not hesitate to contact me by e-mail.
+          If you are interested in this topic or would like to discuss it 
+          further, please do not hesitate to contact me by email.
         </p>
       </div>
     </div>
