@@ -42,34 +42,67 @@ const btnText = ref('Optimise!');
 
 const c1 = -2, c2 = 0, c3 = 1;
 
+const dx_metrics = 0.02;
+const grid_metrics = [];
+for (let x = -10; x <= 10; x += dx_metrics) {
+  grid_metrics.push({
+    x,
+    b1: Math.exp(-Math.pow(x - c1, 2)),
+    b2: Math.exp(-Math.pow(x - c2, 2)),
+    b3: Math.exp(-Math.pow(x - c3, 2))
+  });
+}
+
+const dx_plot = 0.015;
+const grid_plot = [];
+for (let x = -4; x <= 3.5; x += dx_plot) {
+  grid_plot.push({
+    x,
+    b1: Math.exp(-Math.pow(x - c1, 2)),
+    b2: Math.exp(-Math.pow(x - c2, 2)),
+    b3: Math.exp(-Math.pow(x - c3, 2))
+  });
+}
+
 const computeMetrics = (val_t1, val_t2, val_t3) => {
   let m1 = 0, m2 = 0, m3 = 0;
   let mom1 = 0, mom2 = 0, mom3 = 0;
-  let dx = 0.02;
 
-  for (let x = -10; x <= 10; x += dx) {
-    let u1 = Math.exp(val_t1 - Math.pow(x - c1, 2));
-    let u2 = Math.exp(val_t2 - Math.pow(x - c2, 2));
-    let u3 = Math.exp(val_t3 - Math.pow(x - c3, 2));
+  let exp_t1 = Math.exp(val_t1);
+  let exp_t2 = Math.exp(val_t2);
+  let exp_t3 = Math.exp(val_t3);
+
+  for (let i = 0; i < grid_metrics.length; i++) {
+    let pt = grid_metrics[i];
+    
+    let u1 = exp_t1 * pt.b1;
+    let u2 = exp_t2 * pt.b2;
+    let u3 = exp_t3 * pt.b3;
     
     let maxU = Math.max(u1, u2, u3);
     
     if (maxU === u1) {
-      m1 += maxU * dx;
-      mom1 += x * maxU * dx;
+      m1 += maxU;
+      mom1 += pt.x * maxU;
     } else if (maxU === u2) {
-      m2 += maxU * dx;
-      mom2 += x * maxU * dx;
+      m2 += maxU;
+      mom2 += pt.x * maxU;
     } else {
-      m3 += maxU * dx;
-      mom3 += x * maxU * dx;
+      m3 += maxU;
+      mom3 += pt.x * maxU;
     }
   }
+
+  m1 *= dx_metrics;
+  m2 *= dx_metrics;
+  m3 *= dx_metrics;
 
   let Z = m1 + m2 + m3;
   return { 
     m1: m1/Z, m2: m2/Z, m3: m3/Z, 
-    bary1: mom1/m1, bary2: mom2/m2, bary3: mom3/m3, 
+    bary1: mom1/m1,
+    bary2: mom2/m2, 
+    bary3: mom3/m3, 
     Z: Z 
   };
 };
@@ -80,48 +113,51 @@ const drawPlot = () => {
   let x_curve = [], y_curve = [];
   let x1 = [], y1 = [], x2 = [], y2 = [], x3 = [], y3 = [];
   
-  for (let x = -4; x <= 3.5; x += 0.015) {
-    let u1 = Math.exp(t1.value - Math.pow(x - c1, 2));
-    let u2 = Math.exp(t2.value - Math.pow(x - c2, 2));
-    let u3 = Math.exp(t3.value - Math.pow(x - c3, 2));
+  let exp_t1 = Math.exp(t1.value);
+  let exp_t2 = Math.exp(t2.value);
+  let exp_t3 = Math.exp(t3.value);
+  let invZ = 1 / metrics.Z;
+
+  for (let i = 0; i < grid_plot.length; i++) {
+    let pt = grid_plot[i];
+    let u1 = exp_t1 * pt.b1;
+    let u2 = exp_t2 * pt.b2;
+    let u3 = exp_t3 * pt.b3;
     
     let maxU = Math.max(u1, u2, u3);
-    let density = maxU / metrics.Z;
+    let density = maxU * invZ;
     
-    x_curve.push(x);
+    x_curve.push(pt.x);
     y_curve.push(density);
 
-    if (maxU === u1) { x1.push(x); y1.push(density); }
-    else if (maxU === u2) { x2.push(x); y2.push(density); }
-    else { x3.push(x); y3.push(density); }
+    if (maxU === u1) { x1.push(pt.x); y1.push(density); }
+    else if (maxU === u2) { x2.push(pt.x); y2.push(density); }
+    else { x3.push(pt.x); y3.push(density); }
   }
 
   let traces = [];
 
-  traces.push({ x: x1, y: y1, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.6)', xaxis: 'x1', yaxis: 'y1' });
-  traces.push({ x: x2, y: y2, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.8)', xaxis: 'x1', yaxis: 'y1' });
-  traces.push({ x: x3, y: y3, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.6)', xaxis: 'x1', yaxis: 'y1' });
+  traces.push({ x: x1, y: y1, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.6)', xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip' });
+  traces.push({ x: x2, y: y2, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.8)', xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip' });
+  traces.push({ x: x3, y: y3, fill: 'tozeroy', mode: 'none', fillcolor: 'rgba(220, 191, 232, 0.6)', xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip' });
 
   traces.push({
     x: x_curve, y: y_curve, mode: 'lines',
-    line: { color: 'purple', width: 2 }, xaxis: 'x1', yaxis: 'y1'
+    line: { color: 'purple', width: 2 }, xaxis: 'x1', yaxis: 'y1', hoverinfo: 'none'
   });
 
-  const peaks = [
-    Math.exp(t1.value)/metrics.Z, 
-    Math.exp(t2.value)/metrics.Z, 
-    Math.exp(t3.value)/metrics.Z
-  ];
+  const peaks = [exp_t1 * invZ, exp_t2 * invZ, exp_t3 * invZ];
+  
   [c1, c2, c3].forEach((c, idx) => {
     traces.push({
       x: [c, c], y: [0, peaks[idx]], mode: 'lines',
-      line: { color: 'gray', dash: 'dot', width: 2 }, xaxis: 'x1', yaxis: 'y1'
+      line: { color: 'gray', dash: 'dot', width: 2 }, xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip'
     });
   });
 
   traces.push({
     x: [metrics.bary1, metrics.bary2, metrics.bary3], y: [0, 0, 0],
-    mode: 'markers', marker: { color: 'purple', size: 8 }, xaxis: 'x1', yaxis: 'y1'
+    mode: 'markers', marker: { color: 'purple', size: 8 }, xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip'
   });
 
   const masses = [metrics.m1, metrics.m2, metrics.m3];
@@ -140,6 +176,7 @@ const drawPlot = () => {
     title: false,
     margin: { t: 40, b: 40, l: 40, r: 20 },
     showlegend: false,
+    datarevision: Date.now(), // Helps Plotly trigger fast updates
     xaxis: { domain: [0, 0.75], range: [-4, 3.5], title: "Probability density $\\rho$", zeroline: false },
     yaxis: { range: [-0.15, 0.8] },
     xaxis2: { domain: [0.82, 1] },
@@ -158,20 +195,16 @@ const drawPlot = () => {
   Plotly.react(plotContainer.value, traces, layout);
 };
 
-
 let isDrawing = false;
 
 watch([t1, t2, t3], () => {
-  
   if (isDrawing) return;
   
   isDrawing = true;
-  
   requestAnimationFrame(() => {
     if (plotContainer.value) {
       drawPlot();
     }
-    
     isDrawing = false;
   });
 });
