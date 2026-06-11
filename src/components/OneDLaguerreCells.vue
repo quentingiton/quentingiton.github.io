@@ -93,16 +93,21 @@ const computeMetrics = (val_t1, val_t2, val_t3) => {
     }
   }
 
+  let bary1 = mom1 / m1;
+  let bary2 = mom2 / m2;
+  let bary3 = mom3 / m3;
+
   m1 *= dx_metrics;
   m2 *= dx_metrics;
   m3 *= dx_metrics;
 
   let Z = m1 + m2 + m3;
+
   return { 
     m1: m1/Z, m2: m2/Z, m3: m3/Z, 
-    bary1: mom1/m1,
-    bary2: mom2/m2, 
-    bary3: mom3/m3, 
+    bary1: bary1,
+    bary2: bary2, 
+    bary3: bary3, 
     Z: Z 
   };
 };
@@ -150,14 +155,24 @@ const drawPlot = () => {
   
   [c1, c2, c3].forEach((c, idx) => {
     traces.push({
-      x: [c, c], y: [0, peaks[idx]], mode: 'lines',
-      line: { color: 'gray', dash: 'dot', width: 2 }, xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip'
+      x: [c, c],
+      y: [0, peaks[idx]],
+      mode: 'lines',
+      line: { color: 'gray', dash: 'dot', width: 2 },
+      xaxis: 'x1',
+      yaxis: 'y1',
+      hoverinfo: 'skip'
     });
   });
 
   traces.push({
-    x: [metrics.bary1, metrics.bary2, metrics.bary3], y: [0, 0, 0],
-    mode: 'markers', marker: { color: 'purple', size: 8 }, xaxis: 'x1', yaxis: 'y1', hoverinfo: 'skip'
+    x: [metrics.bary1, metrics.bary2, metrics.bary3],
+    y: [0, 0, 0],
+    mode: 'markers',
+    marker: { color: 'purple', size: 8 },
+    xaxis: 'x1',
+    yaxis: 'y1',
+    hoverinfo: 'skip'
   });
 
   const masses = [metrics.m1, metrics.m2, metrics.m3];
@@ -176,7 +191,7 @@ const drawPlot = () => {
     title: false,
     margin: { t: 40, b: 40, l: 40, r: 20 },
     showlegend: false,
-    datarevision: Date.now(), // Helps Plotly trigger fast updates
+    datarevision: Date.now(),
     xaxis: { domain: [0, 0.75], range: [-4, 3.5], title: "Probability density $\\rho$", zeroline: false },
     yaxis: { range: [-0.15, 0.8] },
     xaxis2: { domain: [0.82, 1] },
@@ -188,7 +203,11 @@ const drawPlot = () => {
     annotations: [
       { x: c1, y: peaks[0] + 0.05, text: '$\\hat{x}_1$', showarrow: false, font: { color: '#d77e62', size: 14 } },
       { x: c2, y: peaks[1] + 0.05, text: '$\\hat{x}_2$', showarrow: false, font: { color: '#d77e62', size: 14 } },
-      { x: c3, y: peaks[2] + 0.05, text: '$\\hat{x}_3$', showarrow: false, font: { color: '#d77e62', size: 14 } }
+      { x: c3, y: peaks[2] + 0.05, text: '$\\hat{x}_3$', showarrow: false, font: { color: '#d77e62', size: 14 } },
+
+      { x: metrics.bary1, y: -0.05, text: '$\\hat{x}_1^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } },
+      { x: metrics.bary2, y: -0.05, text: '$\\hat{x}_2^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } },
+      { x: metrics.bary3, y: -0.05, text: '$\\hat{x}_3^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } }
     ]
   };
 
