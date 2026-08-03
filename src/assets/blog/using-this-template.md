@@ -26,7 +26,7 @@ The first thing to do is remove me from it. My details are hardcoded in a small 
 
 One thing that is easy to miss: `index.html` loads icons from a personal [Font Awesome](https://fontawesome.com/) kit registered to me. It works today, but it is my account, so sign up for a free kit of your own and swap the ID.
 
-The contact icons themselves come from Font Awesome for the generic ones and [Academicons](https://jpswalsh.github.io/academicons/) for the academic ones — Google Scholar, arXiv, ORCID, HAL and so on. Adding one is a matter of copying an anchor tag in the `contact-icons` block and changing the class.
+The contact icons themselves come from Font Awesome for the generic ones and [Academicons](https://jpswalsh.github.io/academicons/) for the academic ones (Google Scholar, arXiv, ORCID, HAL and so on). Adding one is a matter of copying an anchor tag in the `contact-icons` block and changing the class.
 
 ## Where the content lives
 

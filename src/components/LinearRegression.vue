@@ -27,8 +27,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import Plotly from 'plotly.js-dist-min';
+
+import { tween, pause, frameThrottle } from '@/utils/animate';
 
 const plotContainer = ref(null);
 
@@ -48,16 +50,25 @@ const drawPlot = () => {
   let traces = [];
   let currentMse = 0;
 
+  // All ten residuals go in a single trace, separated by nulls, rather than one
+  // trace each. Plotly reconciles traces individually, so ten of them meant ten
+  // SVG groups rebuilt per frame to draw ten dashes.
+  const residualX = [];
+  const residualY = [];
+
   for(let i = 0; i < x.length; i++) {
     let y_pred = m.value * x[i] + b.value;
     currentMse += Math.pow(y[i] - y_pred, 2);
-    traces.push({
-      x: [x[i], x[i]], y: [y[i], y_pred],
-      mode: 'lines', line: {color: 'gray', dash: 'dash'},
-      showlegend: false, hoverinfo: 'none'
-    });
+    residualX.push(x[i], x[i], null);
+    residualY.push(y[i], y_pred, null);
   }
-  
+
+  traces.push({
+    x: residualX, y: residualY,
+    mode: 'lines', line: {color: 'gray', dash: 'dash'},
+    showlegend: false, hoverinfo: 'none'
+  });
+
   mse.value = currentMse / x.length;
 
   traces.push({
@@ -71,60 +82,50 @@ const drawPlot = () => {
   });
 
   const layout = {
-    xaxis: {range: [0, 11], title: 'X'},
-    yaxis: {range: [0, 30], title: 'Y'},
+    // Plotly 3 dropped the string shorthand for titles — it must be an object,
+    // or the title is silently ignored.
+    xaxis: {range: [0, 11], title: {text: 'X'}},
+    yaxis: {range: [0, 30], title: {text: 'Y'}},
     margin: {t: 20, b: 40, l: 40, r: 20},
     showlegend: false
   };
 
-  Plotly.react(plotContainer.value, traces, layout);
+  Plotly.react(plotContainer.value, traces, layout, PLOT_CONFIG);
 };
 
-let isDrawing = false;
+const PLOT_CONFIG = { displayModeBar: false, responsive: false };
 
-watch([m, b], () => {
-  
-  if (isDrawing) return;
-  
-  isDrawing = true;
-  
-  requestAnimationFrame(() => {
-    if (plotContainer.value) {
-      drawPlot();
-    }
-    
-    isDrawing = false;
-  });
+const scheduleDraw = frameThrottle(() => {
+  if (plotContainer.value) drawPlot();
 });
+
+watch([m, b], scheduleDraw);
 
 onMounted(() => {
   drawPlot();
 });
 
-const easeInOut = (t) => t * t * (3 - 2 * t);
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
+onBeforeUnmount(() => {
+  scheduleDraw.cancel();
+  if (plotContainer.value) Plotly.purge(plotContainer.value);
+});
 
 const animateOptimization = async () => {
   isOptimizing.value = true;
-  let startM = m.value;
-  let startB = b.value;
-  let frames = 40;
-  let pauseTime = 20; // ms per frame
 
-  for(let i = 1; i <= frames; i++) {
-    let t = easeInOut(i / frames);
+  const startM = m.value;
+  const startB = b.value;
+
+  await tween(800, (t) => {
     m.value = startM + (m_opt - startM) * t;
-    await delay(pauseTime);
-  }
+  });
 
-  await delay(400);
+  await pause(400);
 
-  for(let i = 1; i <= frames; i++) {
-    let t = easeInOut(i / frames);
+  await tween(800, (t) => {
     b.value = startB + (b_opt - startB) * t;
-    await delay(pauseTime);
-  }
-  
+  });
+
   isOptimizing.value = false;
 };
 </script>

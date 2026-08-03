@@ -1,6 +1,12 @@
 <template>
   <div class="interactive-transport">
-    <div ref="plotContainer"></div>
+    <div class="plot-wrapper">
+      <div ref="plotContainer"></div>
+      <!-- The TeX labels live here rather than in Plotly's annotations.
+           MathJax typesets them once on mount; each frame only moves them with
+           a CSS transform, which the compositor handles for free. -->
+      <div ref="labelLayer" class="label-layer" aria-hidden="true"></div>
+    </div>
 
     <div class="controls">
       <div class="slider-row">
@@ -29,10 +35,105 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import Plotly from 'plotly.js-dist-min';
 
+import { tween, pause, frameThrottle } from '@/utils/animate';
+import { typesetMath } from '@/utils/markdown';
+
 const plotContainer = ref(null);
+const labelLayer = ref(null);
+
+// Plot geometry, declared once and used both by Plotly's layout and by the
+// label overlay. Keeping a single source of truth means the labels cannot
+// drift away from the axes if a range is ever changed.
+const PLOT_HEIGHT = 450;
+// Bottom margin leaves room for the tick labels and the overlay axis title.
+const MARGIN = { t: 40, b: 60, l: 40, r: 20 };
+const X_DOMAIN = [0, 0.75];
+const X_RANGE = [-4, 3.5];
+const Y_RANGE = [-0.15, 0.8];
+
+const LABELS = [
+  { tex: '\\hat{x}_1', color: '#d77e62' },
+  { tex: '\\hat{x}_2', color: '#d77e62' },
+  { tex: '\\hat{x}_3', color: '#d77e62' },
+  { tex: '\\hat{x}_1^{(n+1)}', color: 'purple' },
+  { tex: '\\hat{x}_2^{(n+1)}', color: 'purple' },
+  { tex: '\\hat{x}_3^{(n+1)}', color: 'purple' },
+];
+
+// Rendered in the overlay too, so the rho is real MathJax rather than a Unicode
+// glyph. Only the "\(...\)" part is typeset; the rest stays plain text.
+const AXIS_TITLE = 'Probability density \\(\\rho\\)';
+
+const labelEls = [];
+let titleEl = null;
+let lastAnchors = null;
+
+const toPixelX = (x, width) => {
+  const inner = width - MARGIN.l - MARGIN.r;
+  const axisStart = MARGIN.l + X_DOMAIN[0] * inner;
+  const axisWidth = (X_DOMAIN[1] - X_DOMAIN[0]) * inner;
+  return (
+    axisStart + ((x - X_RANGE[0]) / (X_RANGE[1] - X_RANGE[0])) * axisWidth
+  );
+};
+
+const toPixelY = (y) => {
+  const inner = PLOT_HEIGHT - MARGIN.t - MARGIN.b;
+  return (
+    MARGIN.t + (1 - (y - Y_RANGE[0]) / (Y_RANGE[1] - Y_RANGE[0])) * inner
+  );
+};
+
+// Built imperatively so Vue never re-renders these nodes: a re-render would
+// throw away the SVG that MathJax put inside them.
+const createLabels = () => {
+  if (!labelLayer.value) return;
+
+  for (const { tex, color } of LABELS) {
+    const span = document.createElement('span');
+    span.className = 'tex-label';
+    span.style.color = color;
+    span.textContent = `\\(${tex}\\)`;
+    labelLayer.value.appendChild(span);
+    labelEls.push(span);
+  }
+
+  titleEl = document.createElement('span');
+  titleEl.className = 'tex-label axis-title';
+  titleEl.textContent = AXIS_TITLE;
+  labelLayer.value.appendChild(titleEl);
+
+  typesetMath(labelLayer.value);
+};
+
+const positionLabels = (anchors) => {
+  if (anchors) lastAnchors = anchors;
+  if (!lastAnchors || !plotContainer.value) return;
+
+  const width = plotContainer.value.clientWidth;
+  if (!width) return;
+
+  for (let i = 0; i < labelEls.length; i++) {
+    const [dataX, dataY] = lastAnchors[i];
+    const px = toPixelX(dataX, width);
+    const py = toPixelY(dataY);
+    // The second translate centres the label on its anchor point, and stays
+    // correct once MathJax replaces the text and the box changes size.
+    labelEls[i].style.transform =
+      `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+  }
+
+  if (titleEl) {
+    // Centred under the first subplot, in the space the bottom margin reserves.
+    const centre = (X_RANGE[0] + X_RANGE[1]) / 2;
+    const titleY = PLOT_HEIGHT - MARGIN.b + 30;
+    titleEl.style.transform =
+      `translate(${toPixelX(centre, width)}px, ${titleY}px) translate(-50%, -50%)`;
+  }
+};
 
 const t1 = ref(0.0);
 const t2 = ref(0.0);
@@ -188,52 +289,70 @@ const drawPlot = () => {
   });
 
   const layout = {
-    title: false,
-    margin: { t: 40, b: 40, l: 40, r: 20 },
+    height: PLOT_HEIGHT,
+    margin: MARGIN,
     showlegend: false,
-    datarevision: Date.now(),
-    xaxis: { domain: [0, 0.75], range: [-4, 3.5], title: "Probability density $\\rho$", zeroline: false },
-    yaxis: { range: [-0.15, 0.8] },
+    xaxis: {
+      domain: X_DOMAIN,
+      range: X_RANGE,
+      // No title here: it is drawn in the overlay so the rho can be real TeX
+      // without MathJax running on every frame.
+      zeroline: false,
+    },
+    yaxis: { range: Y_RANGE },
     xaxis2: { domain: [0.82, 1] },
-    yaxis2: { anchor: 'x2', range: [0, 0.6], title: 'Masses' },
+    // Plotly 3 dropped the string shorthand for titles — it must be an object,
+    // or the title is silently ignored.
+    yaxis2: { anchor: 'x2', range: [0, 0.6], title: { text: 'Masses' } },
     shapes: [
       { type: 'line', xref: 'x1', yref: 'y1', x0: -4, x1: 3.5, y0: 0, y1: 0, line: { color: 'black', width: 1 } },
       { type: 'line', xref: 'x2', yref: 'y2', x0: -0.5, x1: 2.5, y0: 1/3, y1: 1/3, line: { color: '#d77e62', dash: 'dash' } }
     ],
-    annotations: [
-      { x: c1, y: peaks[0] + 0.05, text: '$\\hat{x}_1$', showarrow: false, font: { color: '#d77e62', size: 14 } },
-      { x: c2, y: peaks[1] + 0.05, text: '$\\hat{x}_2$', showarrow: false, font: { color: '#d77e62', size: 14 } },
-      { x: c3, y: peaks[2] + 0.05, text: '$\\hat{x}_3$', showarrow: false, font: { color: '#d77e62', size: 14 } },
-
-      { x: metrics.bary1, y: -0.05, text: '$\\hat{x}_1^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } },
-      { x: metrics.bary2, y: -0.05, text: '$\\hat{x}_2^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } },
-      { x: metrics.bary3, y: -0.05, text: '$\\hat{x}_3^{(n+1)}$', showarrow: false, font: { color: 'purple', size: 14 } }
-    ]
+    // No `annotations` here on purpose: the six TeX labels are drawn by the
+    // overlay above the plot, so MathJax never runs inside the render loop.
   };
 
-  Plotly.react(plotContainer.value, traces, layout);
+  Plotly.react(plotContainer.value, traces, layout, PLOT_CONFIG);
+
+  positionLabels([
+    [c1, peaks[0] + 0.05],
+    [c2, peaks[1] + 0.05],
+    [c3, peaks[2] + 0.05],
+    [metrics.bary1, -0.05],
+    [metrics.bary2, -0.05],
+    [metrics.bary3, -0.05],
+  ]);
 };
 
-let isDrawing = false;
+// Every trace here sets hoverinfo skip/none and both axes have a fixed range,
+// so there is no interactivity to lose. staticPlot lets Plotly skip building
+// its hover and drag layers entirely on each redraw.
+const PLOT_CONFIG = {
+  staticPlot: true,
+  displayModeBar: false,
+  responsive: false,
+};
 
-watch([t1, t2, t3], () => {
-  if (isDrawing) return;
-  
-  isDrawing = true;
-  requestAnimationFrame(() => {
-    if (plotContainer.value) {
-      drawPlot();
-    }
-    isDrawing = false;
-  });
+const scheduleDraw = frameThrottle(() => {
+  if (plotContainer.value) drawPlot();
 });
+
+watch([t1, t2, t3], scheduleDraw);
 
 onMounted(() => {
+  createLabels();
   drawPlot();
+  // responsive:false means Plotly will not re-fit itself, so a redraw is driven
+  // from here. Without it the plot would keep its old width while the labels,
+  // measured from the container, moved out from under it.
+  window.addEventListener('resize', scheduleDraw);
 });
 
-const easeInOut = (t) => t * t * (3 - 2 * t);
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', scheduleDraw);
+  scheduleDraw.cancel();
+  if (plotContainer.value) Plotly.purge(plotContainer.value);
+});
 
 const animateOptimization = async () => {
   if (isOptimizing.value) return;
@@ -250,26 +369,20 @@ const animateOptimization = async () => {
     opt_t3 -= lr * (m.m3 - 1/3);
   }
 
-  let start_t2 = t2.value;
-  let start_t3 = t3.value;
-  let frames = 40;
-  let pauseTime = 15;
+  const start_t2 = t2.value;
+  const start_t3 = t3.value;
 
   btnText.value = "Theta 2...";
-  for (let i = 1; i <= frames; i++) {
-    let t = easeInOut(i / frames);
+  await tween(600, (t) => {
     t2.value = start_t2 + (opt_t2 - start_t2) * t;
-    await delay(pauseTime);
-  }
+  });
 
-  await delay(200);
+  await pause(200);
 
   btnText.value = "Theta 3...";
-  for (let i = 1; i <= frames; i++) {
-    let t = easeInOut(i / frames);
+  await tween(600, (t) => {
     t3.value = start_t3 + (opt_t3 - start_t3) * t;
-    await delay(pauseTime);
-  }
+  });
 
   btnText.value = "Optimise!";
   isOptimizing.value = false;
@@ -281,6 +394,33 @@ const animateOptimization = async () => {
   font-family: sans-serif;
   max-width: 1000px;
   margin: 0 auto;
+}
+.plot-wrapper {
+  position: relative;
+}
+.label-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+/* :deep() is required: the labels are created with document.createElement, so
+   they never receive the scoped-style attribute a template element would. */
+.label-layer :deep(.tex-label) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  /* Promotes the label to its own compositor layer, so moving it never
+     triggers layout or paint. */
+  will-change: transform;
+}
+.label-layer :deep(.axis-title) {
+  font-size: 13px;
+  color: #444;
 }
 .controls {
   background: #f8f9fa;

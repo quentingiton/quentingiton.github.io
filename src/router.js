@@ -7,9 +7,13 @@ import TalksView from "@/views/TalksView.vue";
 import NotesView from "@/views/NotesView.vue";
 import BlogView from "@/views/BlogView.vue";
 import BlogPostView from "@/views/BlogPostView.vue";
-import ScriptsView from "@/views/ScriptsView.vue";
-import LinearRegressionView from "@/views/LinearRegressionView.vue";
-import OneDLaguerreCellsView from "@/views/OneDLaguerreCellsView.vue";
+
+// Loaded on demand: these pull in Plotly, which is ~4.6 MB on its own. Kept as
+// static imports it lands in the main bundle, so every visitor downloads a
+// plotting library to read the home page.
+const ScriptsView = () => import("@/views/ScriptsView.vue");
+const LinearRegressionView = () => import("@/views/LinearRegressionView.vue");
+const OneDLaguerreCellsView = () => import("@/views/OneDLaguerreCellsView.vue");
 
 const routes = [
   { path: "/", component: HomeView },
@@ -19,7 +23,7 @@ const routes = [
   { path: "/notes", component: NotesView },
   { path: "/blog", component: BlogView },
   { path: "/blog/:slug", component: BlogPostView },
-  { path: "/scripts", component: ScriptsView},
+  { path: "/scripts", component: ScriptsView },
 
   { path: "/scripts/linear-regression", component: LinearRegressionView },
   { path: "/scripts/1d-laguerre-cells", component: OneDLaguerreCellsView },
