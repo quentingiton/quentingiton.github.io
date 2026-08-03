@@ -14,9 +14,26 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
     />
+    <!-- Must come before MathJax loads. Enables single-dollar inline maths,
+         which MathJax leaves off by default. -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+          processEscapes: true,
+        },
+      });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_SVG"></script>
-    <script type="module" crossorigin src="/assets/index-DIS1j5kX.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DSmjU9Lj.css">
+    <script type="module" crossorigin src="/assets/index-hFl_dCPy.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-C02Rcph1.css">
   </head>
   <body>
     <div id="app"></div>
