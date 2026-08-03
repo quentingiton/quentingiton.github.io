@@ -11,9 +11,10 @@ Most of the site is driven by JSON files: you edit a few `.json` files, drop you
 ## What you get
 
 - **Home page** with a profile card (photo, affiliation, contact icons, "About me") plus previews of your latest content
-- **Four content sections** — Publications, Teaching, Talks, Short notes — each with its own page, all fed by JSON
+- **Five content sections** — Publications, Teaching, Talks, Short notes, Blog — each with its own page, all fed by JSON
 - **Automatic hiding**: a section whose JSON file is an empty array disappears from both the home page and the navigation bar. Nothing to comment out.
 - **PDF links** for papers, lecture notes, exercise sheets and slides
+- **Blog** with posts written in Markdown, including LaTeX support
 - **BibTeX "Cite" modal** with copy-to-clipboard for publications
 - **Scripts section** for interactive demos (Plotly-based; two examples included)
 - **MathJax** loaded globally, so you can write LaTeX in your content
@@ -162,6 +163,24 @@ A filled-in example is kept in [publi_template.json](src/assets/json/publi_templ
 
 > If you rename a JSON field, update the matching component too — the field names in these files are read directly by the Vue templates.
 
+### `blog.json` + Markdown posts
+
+The blog is the one section that isn't stored entirely in JSON: `blog.json` holds the metadata, and the post body is a Markdown file in [src/assets/blog/](src/assets/blog/). The **`slug` is what ties them together** — it must match the `.md` filename and it becomes the URL.
+
+| Field | Type | Notes |
+| --- | --- | --- |
+| `id` | number | unique |
+| `date` | string | `YYYY-MM-DD`. Unlike other sections, this one **is displayed**, and it sorts newest first |
+| `slug` | string | must equal the Markdown filename without `.md`; the post lives at `/blog/<slug>` |
+| `title` | string | shown in lists and as the page heading |
+| `summary` | string *(optional)* | one or two sentences, shown in the list view |
+
+To publish a post: drop `my-post.md` in `src/assets/blog/`, add an entry with `"slug": "my-post"` to `blog.json`. Nothing else to run — Vite picks up the file automatically.
+
+Standard Markdown works (GitHub-flavoured, so tables and fenced code blocks included). Don't repeat the title as a heading in the file — the page renders it from `blog.json`.
+
+**LaTeX in posts** works with `$...$` inline and `$$...$$` for display. Markdown and TeX normally fight over `_` and `\` — `$x_1 + x_2$` would come out italicised — so [src/utils/markdown.js](src/utils/markdown.js) lifts the formulas out before parsing and puts them back afterwards. One consequence: two dollar signs on the same line of prose are read as maths, so write `\$` if you mean currency.
+
 ### The Scripts section
 
 Scripts are **not** JSON-driven: each demo is a hand-written Vue component. To add one, create the component in [src/components/](src/components/), wrap it in a view in [src/views/](src/views/), register a route under `/scripts/...` in [src/router.js](src/router.js), and add a thumbnail tile in [src/views/ScriptsView.vue](src/views/ScriptsView.vue).
@@ -185,8 +204,12 @@ The two examples use [Plotly](https://plotly.com/javascript/). If you remove the
     ├── views/               One page per route
     ├── components/          Reusable blocks and single-item renderers
     │   └── ComponentManager.vue   Decides which home-page sections to render
+    ├── utils/
+    │   ├── posts.js         Joins blog.json with the Markdown files
+    │   └── markdown.js      Markdown → HTML, keeping LaTeX intact
     └── assets/
         ├── json/            ← your content lives here
+        ├── blog/            ← blog posts, one .md file each
         ├── images/          Profile picture, script thumbnails
         ├── icons/           Inline SVG icon components
         └── less/            variables.less (theme) + main.less (global styles)
@@ -246,7 +269,8 @@ Both steps are needed: pushing to `main` does not update the live site by itself
 
 - **Two places check for empty sections.** [App.vue](src/App.vue) (navbar links) and [ComponentManager.vue](src/components/ComponentManager.vue) (home-page blocks) each contain their own copy of the same emptiness check. If you add a section, remember both.
 - **JSON files must stay valid JSON.** An empty file breaks the build; use `[]` instead. No comments, no trailing commas.
-- **MathJax** is loaded from a CDN in `index.html` and renders LaTeX found in the page. Sections need `$...$` / `\(...\)` delimiters and content that is present at load time.
+- **MathJax** is loaded from a CDN in `index.html`, configured there to accept `$...$` inline as well as `$$...$$`. It scans the page once on load, so anything rendered later has to be re-typeset by hand — see `typesetMath` in [src/utils/markdown.js](src/utils/markdown.js), which is what blog posts use.
+- **Blog posts are rendered with `v-html`**, which scoped styles don't reach. The `.post-body` rules therefore live in `main.less` rather than in the view. Posts are your own content, so this is safe; don't reuse the pattern for anything user-submitted.
 - **Unused leftovers** you can safely delete: `src/assets/json/conferences.json` (empty and imported nowhere) and `src/components/ConferencesComponent.vue`. `publi_template.json` is kept as a schema example only.
 - **`dist/` and `node_modules/` are gitignored** — the published site lives on the `gh-pages` branch, not on `main`.
 - **External CDNs.** Font Awesome, Academicons and MathJax are loaded from CDNs in `index.html`, so the site needs an internet connection to render icons and formulas.

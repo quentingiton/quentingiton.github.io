@@ -19,6 +19,11 @@
     id="notes"
     :notes="notes"
   />
+  <BlogComponent
+    v-if="!isPostsEmpty"
+    id="blog"
+    :posts="posts"
+  />
 </template>
 
 <script>
@@ -34,12 +39,16 @@ import talks from "@/assets/json/talks.json";
 import ShortNotesComponent from "./ShortNotesComponent.vue";
 import notes from "@/assets/json/notes.json";
 
+import BlogComponent from "./BlogComponent.vue";
+import { posts } from "@/utils/posts";
+
 export default {
   components: {
     PublicationsComponent,
     TeachingComponent,
     TalksComponent,
     ShortNotesComponent,
+    BlogComponent,
   },
   data() {
     return {
@@ -51,6 +60,8 @@ export default {
       isTalksEmpty: true,
       notes,
       isNotesEmpty: true,
+      posts,
+      isPostsEmpty: true,
     };
   },
   created() {
@@ -63,6 +74,7 @@ export default {
       this.isCoursesEmpty = isEmpty(courses);
       this.isTalksEmpty = isEmpty(talks);
       this.isNotesEmpty = isEmpty(notes);
+      this.isPostsEmpty = isEmpty(posts);
     },
   },
 };

@@ -27,6 +27,9 @@
         :notes="notes"
           >Notes</RouterLink
         >
+        <RouterLink to="/blog" active-class="link-active" v-if="!isPostsEmpty"
+          >Blog</RouterLink
+        >
         <RouterLink to="/scripts" active-class="link-active">Scripts</RouterLink>
         <RouterLink to="/"><i class="fas fa-house"></i></RouterLink>
       </div>
@@ -51,6 +54,8 @@ import talks from "@/assets/json/talks.json";
 import ShortNotesComponent from "./components/ShortNotesComponent.vue";
 import notes from "@/assets/json/notes.json";
 
+import { posts } from "@/utils/posts";
+
 export default {
   components: {
     PublicationsComponent,
@@ -68,6 +73,8 @@ export default {
       isTalksEmpty: true,
       notes,
       isNotesEmpty: true,
+      posts,
+      isPostsEmpty: true,
     };
   },
   created() {
@@ -80,6 +87,7 @@ export default {
       this.isCoursesEmpty = isEmpty(courses);
       this.isTalksEmpty = isEmpty(talks);
       this.isNotesEmpty = isEmpty(notes);
+      this.isPostsEmpty = isEmpty(posts);
     },
   },
 };

@@ -194,6 +194,105 @@ nav {
   text-overflow: ellipsis;
 }
 
+/* Blog posts are injected with v-html, so scoped styles never reach them.
+   These rules have to stay global. */
+.post-body {
+  text-align: justify;
+  line-height: 1.6em;
+  font-size: 18px;
+
+  h1 {
+    font-size: 22px;
+    margin-top: 30px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  p {
+    margin-bottom: 14px;
+  }
+
+  ul,
+  ol {
+    padding-left: 22px;
+    margin-bottom: 14px;
+  }
+
+  li {
+    margin-bottom: 6px;
+    line-height: 1.6em;
+  }
+
+  code {
+    background-color: @background-grey;
+    font-family:
+      Roboto Mono,
+      monospace;
+    font-size: 0.85em;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  pre {
+    background-color: @background-grey;
+    font-family:
+      Roboto Mono,
+      monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    padding: 12px;
+    border-radius: 5px;
+    overflow-x: auto;
+    text-align: left;
+
+    code {
+      background: none;
+      padding: 0;
+      font-size: inherit;
+    }
+  }
+
+  blockquote {
+    margin: 15px 0;
+    padding-left: 15px;
+    border-left: 3px solid @accent-color;
+    color: @light-grey;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid @border-grey;
+    margin: 25px 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 14px;
+    font-size: 0.9em;
+
+    th,
+    td {
+      border: 1px solid @border-grey;
+      padding: 6px 10px;
+      text-align: left;
+    }
+  }
+}
+
 .code {
   background-color: @background-grey;
   font-family:
