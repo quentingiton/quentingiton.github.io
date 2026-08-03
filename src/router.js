@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import HomeView from "@/views/HomeView.vue";
-import TeachingView from "@/views/TeachingView.vue";
 import PublicationsView from "@/views/PublicationsView.vue";
+import TeachingView from "@/views/TeachingView.vue";
+import TalksView from "@/views/TalksView.vue";
 import NotesView from "@/views/NotesView.vue";
 import ScriptsView from "@/views/ScriptsView.vue";
 import LinearRegressionView from "@/views/LinearRegressionView.vue";
@@ -10,8 +11,9 @@ import OneDLaguerreCellsView from "@/views/OneDLaguerreCellsView.vue";
 
 const routes = [
   { path: "/", component: HomeView },
-  { path: "/teaching", component: TeachingView },
   { path: "/publications", component: PublicationsView },
+  { path: "/teaching", component: TeachingView },
+  { path: "/talks", component: TalksView },
   { path: "/notes", component: NotesView },
   { path: "/scripts", component: ScriptsView},
 

@@ -3,17 +3,23 @@
     <nav id="desktop-nav">
       <div class="logo"><RouterLink to="/">Quentin Giton</RouterLink></div>
       <div class="nav-links">
+        <RouterLink to="/publications" active-class="link-active"
+        v-if="!isPublisEmpty"
+        id="publications"
+        :publis="publis"  
+          >Publications</RouterLink
+        >
         <RouterLink to="/teaching" active-class="link-active"
         v-if="!isCoursesEmpty"
         id="teaching"
         :courses="courses"
           >Teaching</RouterLink
         >
-        <RouterLink to="/publications" active-class="link-active"
-        v-if="!isPublisEmpty"
-        id="publications"
-        :publis="publis"  
-          >Publications</RouterLink
+        <RouterLink to="/talks" active-class="link-active"
+        v-if="!isTalksEmpty"
+        id="talks"
+        :talks="talks"  
+          >Talks</RouterLink
         >
         <RouterLink to="/notes" active-class="link-active"
         v-if="!isNotesEmpty"
@@ -33,27 +39,33 @@
 </template>
 
 <script>
+import PublicationsComponent from "./components/PublicationsComponent.vue";
+import publis from "@/assets/json/publications.json";
+
 import TeachingComponent from "./components/TeachingComponent.vue";
 import courses from "@/assets/json/teaching.json";
 
-import PublicationsComponent from "./components/PublicationsComponent.vue";
-import publis from "@/assets/json/publications.json";
+import TalksComponent from "./components/TalksComponent.vue";
+import talks from "@/assets/json/talks.json";
 
 import ShortNotesComponent from "./components/ShortNotesComponent.vue";
 import notes from "@/assets/json/notes.json";
 
 export default {
   components: {
-    TeachingComponent,
     PublicationsComponent,
+    TeachingComponent,
+    TalksComponent,
     ShortNotesComponent,
   },
   data() {
     return {
-      courses,
-      isCoursesEmpty: true,
       publis,
       isPublisEmpty: true,
+      courses,
+      isCoursesEmpty: true,
+      talks,
+      isTalksEmpty: true,
       notes,
       isNotesEmpty: true,
     };
@@ -64,8 +76,9 @@ export default {
   methods: {
     checkInfos() {
       // Check if each JSON file is empty
-      this.isCoursesEmpty = isEmpty(courses);
       this.isPublisEmpty = isEmpty(publis);
+      this.isCoursesEmpty = isEmpty(courses);
+      this.isTalksEmpty = isEmpty(talks);
       this.isNotesEmpty = isEmpty(notes);
     },
   },

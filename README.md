@@ -27,3 +27,11 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### Recommended workflow:
+```sh
+git add .
+git commit -m "Update site"
+git push
+npm run deploy
+```
