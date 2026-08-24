@@ -3,30 +3,70 @@
     "id": 1,
     "year": 2425,
     "semester": 1,
-    "title": "Mathematics",
+    "title": "Mathématiques",
     "description": "L2 - 2024/2025 - Faculté Jean Monnet",
     "instructors": "Quentin Giton, Luc Joseph",
-    "LN": "",
-    "ES": ""
+    "LN": "/pdf/teaching/24-25/L2/LN.pdf",
+    "ES": "/pdf/teaching/24-25/L2/ES.pdf"
   },
   {
     "id": 2,
     "year": 2425,
     "semester": 1,
-    "title": "Mathematics",
+    "title": "Mathématiques",
     "description": "L3 - 2024/2025 - Faculté Jean Monnet",
     "instructors": "Quentin Giton, Abdelhamid Amroun",
-    "LN": "",
-    "ES": ""
+    "LN": "/pdf/teaching/24-25/L3/LN.pdf",
+    "ES": "/pdf/teaching/24-25/L3/ES.pdf"
   },
   {
     "id": 3,
     "year": 2425,
     "semester": 2,
-    "title": "Optimization",
+    "title": "Optimisation",
     "description": "M1 - 2024/2025 - CentraleSupélec",
     "instructors": "Quentin Giton, Jean-Christophe Pesquet, Giorgio Valmorbida",
     "LN": "/pdf/teaching/24-25/Optim/LN.pdf",
     "ES": ""
+  },
+  {
+    "id": 4,
+    "year": 2526,
+    "semester": 1,
+    "title": "BioStats",
+    "description": "L2 - 2025/2026 - Faculté d'Orsay",
+    "instructors": "Quentin Giton, Elodie Marchadier, Nathalie Castelles",
+    "LN": "/pdf/teaching/25-26/BioStats/LN.pdf",
+    "ES": "/pdf/teaching/25-26/BioStats/ES.pdf"
+  },
+  {
+    "id": 5,
+    "year": 2526,
+    "semester": 1,
+    "title": "EcoStats",
+    "description": "L2 - 2025/2026 - Faculté d'Orsay",
+    "instructors": "Quentin Giton, Elodie Marchadier, Nathalie Castelles",
+    "LN": "/pdf/teaching/25-26/EcoStats/LN.pdf",
+    "ES": ""
+  },
+  {
+    "id": 6,
+    "year": 2526,
+    "semester": 2,
+    "title": "Analyse numérique avec Python",
+    "description": "L2 - 2025/2026 - Faculté d'Orsay",
+    "instructors": "Quentin Giton, Jean-Baptiste Apoung Kamga",
+    "LN": "",
+    "ES": ""
+  },
+  {
+    "id": 7,
+    "year": 2627,
+    "semester": 1,
+    "title": "BioStats",
+    "description": "L2 - 2026/2027 - Faculté d'Orsay",
+    "instructors": "Quentin Giton, Elodie Marchadier, Nathalie Castelles",
+    "LN": "/pdf/teaching/26-27/BioStats/LN.pdf",
+    "ES": "/pdf/teaching/26-27/BioStats/ES.pdf"
   }
 ]
